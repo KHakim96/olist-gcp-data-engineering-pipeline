@@ -59,7 +59,7 @@ services:
   airflow-webserver:
     <<: *airflow-common
     container_name: airflow_webserver
-    command: airflow webserver
+    command: airflow webserver --workers 1
     ports:
       - "8080:8080"
     restart: unless-stopped
