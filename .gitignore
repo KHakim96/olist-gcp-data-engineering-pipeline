@@ -1,0 +1,11 @@
+config/service-account.json
+
+__pycache__/
+
+*.pyc
+
+.env
+
+.venv
+
+.DS_Store
