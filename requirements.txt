@@ -23,3 +23,14 @@ pytest
 loguru
 
 tabulate
+
+# ==========================================
+# Google Cloud
+# ==========================================
+
+google-cloud-storage
+google-cloud-bigquery
+pandas
+requests
+kagglehub
+pyyaml

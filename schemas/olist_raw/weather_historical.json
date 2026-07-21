@@ -1,0 +1,42 @@
+[
+    {
+        "name": "city",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "country",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "date",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "temperature_max",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "temperature_min",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "precipitation_sum",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "rain_sum",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "weather_code",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    }
+]
