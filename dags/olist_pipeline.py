@@ -19,6 +19,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
 
 # ==========================================================
 # Import Pipeline Tasks
@@ -81,6 +82,7 @@ with DAG(
     description="End-to-End Olist GCP Data Engineering Pipeline",
     start_date=datetime(2026, 1, 1),
     schedule=None,
+    # schedule="0 2 * * *" #everyday at 2am
     catchup=False,
     default_args=default_args,
     tags=[
@@ -168,6 +170,22 @@ with DAG(
     )
 
     # ======================================================
+    # dbt
+    # ======================================================
+
+    task_dbt_run = BashOperator(
+        task_id="dbt_run",
+        cwd="/opt/airflow/dbt_olist",
+        bash_command="dbt run",
+    )
+
+    task_dbt_test = BashOperator(
+        task_id="dbt_test",
+        cwd="/opt/airflow/dbt_olist",
+        bash_command="dbt test",
+    )
+
+    # ======================================================
     # Dependencies
     # ======================================================
 
@@ -183,5 +201,7 @@ with DAG(
         >> task_create_tables
         >> task_load_olist
         >> task_load_weather
+        >> task_dbt_run
+        >> task_dbt_test
         >> end
     )
