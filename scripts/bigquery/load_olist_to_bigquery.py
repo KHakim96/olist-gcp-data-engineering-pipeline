@@ -1,24 +1,35 @@
 """
-Load all Olist CSV files into BigQuery.
+Load Olist CSV Files into BigQuery.
 """
-
-from pathlib import Path
 
 from google.cloud import bigquery
 
-PROJECT_ID = "olist-gcp-data-engineering"
-DATASET = "olist_raw"
+from scripts.utilities.config import (
+    PROJECT_ID,
+    BQ_RAW_DATASET,
+    OLIST_RAW_DIR,
+)
 
-DATA_DIR = Path("data/raw/olist")
+# ==========================================================
+# Configuration
+# ==========================================================
+
+DATASET = BQ_RAW_DATASET
+
+DATA_DIR = OLIST_RAW_DIR
 
 client = bigquery.Client(project=PROJECT_ID)
+
+# ==========================================================
+# Load CSV
+# ==========================================================
 
 
 def load_csv(csv_file):
 
     table_name = csv_file.stem
 
-    table_id = f"{PROJECT_ID}.{DATASET}.{table_name}"
+    table_id = f"{PROJECT_ID}." f"{DATASET}." f"{table_name}"
 
     table = client.get_table(table_id)
 
@@ -42,12 +53,17 @@ def load_csv(csv_file):
         )
 
     try:
+
         job.result()
+
     except Exception:
+
         print(f"\nFAILED : {table_name}")
 
         if job.errors:
+
             for error in job.errors:
+
                 print(error)
 
         raise
@@ -57,15 +73,28 @@ def load_csv(csv_file):
     print(f"✓ {table_name:<45}" f"{table.num_rows:>10,} rows")
 
 
+# ==========================================================
+# Main
+# ==========================================================
+
+
 def main():
 
     print("=" * 70)
     print("Load Olist CSVs into BigQuery")
     print("=" * 70)
 
-    for csv in sorted(DATA_DIR.glob("*.csv")):
+    csv_files = sorted(DATA_DIR.glob("*.csv"))
 
-        load_csv(csv)
+    if not csv_files:
+
+        print("No CSV files found.")
+
+        return
+
+    for csv_file in csv_files:
+
+        load_csv(csv_file)
 
     print()
     print("=" * 70)

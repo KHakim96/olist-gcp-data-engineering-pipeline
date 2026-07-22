@@ -1,15 +1,29 @@
 """
-Create required BigQuery datasets.
+Create Required BigQuery Datasets.
 """
 
 from google.cloud import bigquery
 
-PROJECT_ID = "olist-gcp-data-engineering"
+from scripts.utilities.config import (
+    PROJECT_ID,
+    BQ_RAW_DATASET,
+    BQ_ANALYTICS_DATASET,
+)
+
+# ==========================================================
+# Configuration
+# ==========================================================
 
 DATASETS = [
-    "olist_raw",
-    "olist_analytics",
+    BQ_RAW_DATASET,
+    BQ_ANALYTICS_DATASET,
 ]
+
+LOCATION = "asia-southeast1"
+
+# ==========================================================
+# Main
+# ==========================================================
 
 
 def main():
@@ -24,15 +38,21 @@ def main():
 
         dataset_id = f"{PROJECT_ID}.{dataset}"
 
-        obj = bigquery.Dataset(dataset_id)
-        obj.location = "asia-southeast1"
+        dataset_obj = bigquery.Dataset(dataset_id)
 
-        client.create_dataset(obj, exists_ok=True)
+        dataset_obj.location = LOCATION
+
+        client.create_dataset(
+            dataset_obj,
+            exists_ok=True,
+        )
 
         print(f"✓ {dataset}")
 
     print()
+    print("=" * 70)
     print("Completed")
+    print("=" * 70)
 
 
 if __name__ == "__main__":

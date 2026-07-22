@@ -1,23 +1,34 @@
 """
-Create BigQuery tables from JSON schema files.
+Create BigQuery Tables from JSON Schemas.
 """
 
-from pathlib import Path
 import json
 
 from google.cloud import bigquery
 
-PROJECT_ID = "olist-gcp-data-engineering"
+from scripts.utilities.config import (
+    PROJECT_ID,
+    SCHEMA_DIR,
+)
 
-SCHEMA_ROOT = Path("schemas")
+# ==========================================================
+# Configuration
+# ==========================================================
+
+SCHEMA_ROOT = SCHEMA_DIR
 
 client = bigquery.Client(project=PROJECT_ID)
+
+# ==========================================================
+# Load Schema
+# ==========================================================
 
 
 def load_schema(schema_file):
 
-    with open(schema_file, encoding="utf-8") as f:
-        schema_json = json.load(f)
+    with open(schema_file, encoding="utf-8") as file:
+
+        schema_json = json.load(file)
 
     schema = []
 
@@ -27,11 +38,19 @@ def load_schema(schema_file):
             bigquery.SchemaField(
                 name=column["name"],
                 field_type=column["type"],
-                mode=column.get("mode", "NULLABLE"),
+                mode=column.get(
+                    "mode",
+                    "NULLABLE",
+                ),
             )
         )
 
     return schema
+
+
+# ==========================================================
+# Create Tables
+# ==========================================================
 
 
 def create_dataset_tables(dataset_folder):
@@ -45,16 +64,24 @@ def create_dataset_tables(dataset_folder):
 
         table_name = schema_file.stem
 
-        table_id = f"{PROJECT_ID}.{dataset}.{table_name}"
+        table_id = f"{PROJECT_ID}." f"{dataset}." f"{table_name}"
 
         table = bigquery.Table(
             table_id,
             schema=load_schema(schema_file),
         )
 
-        client.create_table(table, exists_ok=True)
+        client.create_table(
+            table,
+            exists_ok=True,
+        )
 
         print(f"✓ {table_name}")
+
+
+# ==========================================================
+# Main
+# ==========================================================
 
 
 def main():

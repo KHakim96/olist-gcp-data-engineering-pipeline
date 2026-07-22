@@ -1,24 +1,31 @@
 """
 Fetch Historical Weather Data for Brazil.
 
-Steps
------
+Responsibilities
+----------------
 1. Read Olist order dates.
 2. Determine historical date range.
-3. Fetch historical weather (next part).
-4. Save JSON (next part).
+3. Download historical weather from Open-Meteo.
+4. Save data as NDJSON for BigQuery.
 """
 
-from pathlib import Path
+import json
 
 import pandas as pd
+import requests
+
+from scripts.utilities.config import (
+    ORDERS_FILE,
+    WEATHER_RAW_DIR,
+)
 
 # ==========================================================
 # Configuration
 # ==========================================================
 
-ORDERS_FILE = Path("data/raw/olist/olist_orders_dataset.csv")
+OUTPUT_FILE = WEATHER_RAW_DIR / "weather_historical.json"
 
+WEATHER_RAW_DIR.mkdir(parents=True, exist_ok=True)
 
 BRAZIL_CITIES = [
     {"city": "Sao Paulo", "lat": -23.5505, "lon": -46.6333},
@@ -32,7 +39,6 @@ BRAZIL_CITIES = [
     {"city": "Recife", "lat": -8.0476, "lon": -34.8770},
     {"city": "Porto Alegre", "lat": -30.0346, "lon": -51.2177},
 ]
-
 
 # ==========================================================
 # Read Olist Date Range
@@ -54,15 +60,8 @@ def get_order_date_range():
     return start_date, end_date
 
 
-import json
-import requests
-
-OUTPUT_DIR = Path("data/raw/weather")
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
 # ==========================================================
-# Fetch Historical Weather
+# Download Historical Weather
 # ==========================================================
 
 
@@ -84,28 +83,49 @@ def fetch_city_weather(city, start_date, end_date):
     )
 
     response = requests.get(url, timeout=120)
+
     response.raise_for_status()
 
-    data = response.json()["daily"]
+    daily = response.json()["daily"]
 
     records = []
 
-    for i in range(len(data["time"])):
+    for i in range(len(daily["time"])):
 
         records.append(
             {
                 "city": city["city"],
                 "country": "Brazil",
-                "date": data["time"][i],
-                "temperature_max": data["temperature_2m_max"][i],
-                "temperature_min": data["temperature_2m_min"][i],
-                "precipitation_sum": data["precipitation_sum"][i],
-                "rain_sum": data["rain_sum"][i],
-                "weather_code": data["weather_code"][i],
+                "date": daily["time"][i],
+                "temperature_max": daily["temperature_2m_max"][i],
+                "temperature_min": daily["temperature_2m_min"][i],
+                "precipitation_sum": daily["precipitation_sum"][i],
+                "rain_sum": daily["rain_sum"][i],
+                "weather_code": daily["weather_code"][i],
             }
         )
 
     return records
+
+
+# ==========================================================
+# Save NDJSON
+# ==========================================================
+
+
+def save_weather(records):
+
+    with open(
+        OUTPUT_FILE,
+        "w",
+        encoding="utf-8",
+    ) as f:
+
+        for record in records:
+
+            f.write(json.dumps(record))
+
+            f.write("\n")
 
 
 # ==========================================================
@@ -141,15 +161,7 @@ def main():
 
         all_weather.extend(weather)
 
-    output_file = OUTPUT_DIR / "weather_historical.json"
-
-    with open(output_file, "w", encoding="utf-8") as f:
-
-        for record in all_weather:
-
-            f.write(json.dumps(record))
-
-            f.write("\n")
+    save_weather(all_weather)
 
     print()
     print("=" * 70)
@@ -157,7 +169,7 @@ def main():
     print("=" * 70)
     print(f"Cities          : {len(BRAZIL_CITIES)}")
     print(f"Weather Records : {len(all_weather)}")
-    print(f"Output          : {output_file.resolve()}")
+    print(f"Output          : {OUTPUT_FILE.resolve()}")
 
 
 if __name__ == "__main__":

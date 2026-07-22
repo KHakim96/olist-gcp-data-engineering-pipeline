@@ -6,22 +6,28 @@ Responsibilities
 1. Read every CSV inside data/raw/olist.
 2. Infer BigQuery data types.
 3. Generate JSON schema files.
-4. Save schemas into schemas/olist.
+4. Save schemas into schemas/olist_raw.
 """
 
-from pathlib import Path
 import json
+from pathlib import Path
 
 import pandas as pd
+
+from scripts.utilities.config import (
+    OLIST_RAW_DIR,
+    SCHEMA_DIR,
+)
 
 # ==========================================================
 # Configuration
 # ==========================================================
 
-RAW_DATA_DIR = Path("data/raw/olist")
-SCHEMA_DIR = Path("schemas/olist")
+RAW_DATA_DIR = OLIST_RAW_DIR
 
-SCHEMA_DIR.mkdir(parents=True, exist_ok=True)
+OUTPUT_DIR = SCHEMA_DIR / "olist_raw"
+
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ==========================================================
@@ -70,12 +76,21 @@ def generate_schema(csv_file: Path):
             }
         )
 
-    output_file = SCHEMA_DIR / f"{csv_file.stem}.json"
+    output_file = OUTPUT_DIR / f"{csv_file.stem}.json"
 
-    with open(output_file, "w", encoding="utf-8") as file:
-        json.dump(schema, file, indent=4)
+    with open(
+        output_file,
+        "w",
+        encoding="utf-8",
+    ) as file:
 
-    print(f"✔ {csv_file.name}")
+        json.dump(
+            schema,
+            file,
+            indent=4,
+        )
+
+    print(f"✓ {csv_file.stem}")
 
 
 # ==========================================================
@@ -86,24 +101,27 @@ def generate_schema(csv_file: Path):
 def main():
 
     print("=" * 70)
-    print("BigQuery Schema Generator")
+    print("Infer BigQuery Schemas")
     print("=" * 70)
 
     csv_files = sorted(RAW_DATA_DIR.glob("*.csv"))
 
     if not csv_files:
+
         print("No CSV files found.")
+
         return
 
     for csv_file in csv_files:
+
         generate_schema(csv_file)
 
     print()
     print("=" * 70)
     print("Completed")
     print("=" * 70)
-    print(f"Schemas Generated : {len(csv_files)}")
-    print(f"Output            : {SCHEMA_DIR.resolve()}")
+    print(f"Schemas : {len(csv_files)}")
+    print(f"Output  : {OUTPUT_DIR.resolve()}")
 
 
 if __name__ == "__main__":

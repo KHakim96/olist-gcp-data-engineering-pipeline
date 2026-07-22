@@ -9,10 +9,20 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW__CORE__FERNET_KEY}
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: ${AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION}
     AIRFLOW_HOME: /opt/airflow
+    PYTHONPATH: /opt/airflow
+    GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/config/service-account.json
+    GOOGLE_CLOUD_PROJECT: olist-gcp-data-engineering
+    GCS_BUCKET: olist-gcp-data-lake-luqman
+    BQ_RAW_DATASET: olist_raw
+    BQ_ANALYTICS_DATASET: olist_analytics
+
   volumes:
     - ./dags:/opt/airflow/dags
     - ./scripts:/opt/airflow/scripts
     - ./config:/opt/airflow/config
+    - ./data:/opt/airflow/data
+    - ./schemas:/opt/airflow/schemas
+    - ./dbt_olist:/opt/airflow/dbt_olist
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
   depends_on:

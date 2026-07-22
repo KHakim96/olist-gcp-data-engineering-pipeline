@@ -14,13 +14,15 @@ import shutil
 
 import kagglehub
 
+from scripts.utilities.config import OLIST_RAW_DIR
+
 # ==========================================================
 # Configuration
 # ==========================================================
 
 DATASET = "jayeshsalunke101/brazilian-ecommerce-public-dataset"
 
-DESTINATION = Path("data/raw/olist")
+DESTINATION = OLIST_RAW_DIR
 
 EXPECTED_FILES = [
     "olist_customers_dataset.csv",
@@ -60,9 +62,11 @@ def main():
     DESTINATION.mkdir(parents=True, exist_ok=True)
 
     if dataset_exists():
+
         print("Dataset already exists.")
         print(f"Location : {DESTINATION.resolve()}")
         print("Skipping download.")
+
         return
 
     print("Downloading dataset from Kaggle...")
@@ -72,8 +76,14 @@ def main():
     copied = 0
 
     for csv_file in download_path.glob("*.csv"):
-        shutil.copy2(csv_file, DESTINATION / csv_file.name)
+
+        shutil.copy2(
+            csv_file,
+            DESTINATION / csv_file.name,
+        )
+
         copied += 1
+
         print(f"Copied : {csv_file.name}")
 
     print()

@@ -1,16 +1,25 @@
 """
-Infer BigQuery schema from historical weather JSON.
+Infer BigQuery Schema from Historical Weather Data.
 """
 
-from pathlib import Path
 import json
 
-INPUT_FILE = Path("data/raw/weather/weather_historical.json")
+from scripts.utilities.config import (
+    WEATHER_FILE,
+    SCHEMA_DIR,
+)
 
-OUTPUT_FILE = Path("schemas/weather/weather_historical.json")
+# ==========================================================
+# Configuration
+# ==========================================================
 
-OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+INPUT_FILE = WEATHER_FILE
 
+OUTPUT_DIR = SCHEMA_DIR / "olist_raw"
+
+OUTPUT_FILE = OUTPUT_DIR / "weather_historical.json"
+
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 TYPE_MAPPING = {
     str: "STRING",
@@ -18,6 +27,11 @@ TYPE_MAPPING = {
     float: "FLOAT",
     bool: "BOOLEAN",
 }
+
+
+# ==========================================================
+# Helper
+# ==========================================================
 
 
 def infer_type(value):
@@ -28,16 +42,20 @@ def infer_type(value):
     return TYPE_MAPPING.get(type(value), "STRING")
 
 
+# ==========================================================
+# Main
+# ==========================================================
+
+
 def main():
 
     print("=" * 70)
     print("Infer Weather BigQuery Schema")
     print("=" * 70)
 
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        first_line = f.readline()
+    with open(INPUT_FILE, "r", encoding="utf-8") as file:
 
-    sample = json.loads(first_line)
+        sample = json.loads(file.readline())
 
     schema = []
 
@@ -51,12 +69,23 @@ def main():
             }
         )
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+    with open(
+        OUTPUT_FILE,
+        "w",
+        encoding="utf-8",
+    ) as file:
 
-        json.dump(schema, f, indent=4)
+        json.dump(
+            schema,
+            file,
+            indent=4,
+        )
 
     print()
-    print(f"Schema saved : {OUTPUT_FILE}")
+    print("=" * 70)
+    print("Completed")
+    print("=" * 70)
+    print(f"Schema : {OUTPUT_FILE.resolve()}")
 
 
 if __name__ == "__main__":

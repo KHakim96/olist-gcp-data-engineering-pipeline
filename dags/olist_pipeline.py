@@ -1,14 +1,66 @@
-# ==========================================================
-# Imports
-# ==========================================================
+"""
+Olist GCP Data Engineering Pipeline
+
+End-to-end pipeline
+
+Kaggle
+    ↓
+Weather API
+    ↓
+Schema Generation
+    ↓
+Google Cloud Storage
+    ↓
+BigQuery Raw Layer
+"""
 
 from datetime import datetime
 
 from airflow import DAG
-
-from airflow.operators.bash import BashOperator
-
 from airflow.operators.empty import EmptyOperator
+from airflow.operators.python import PythonOperator
+
+# ==========================================================
+# Import Pipeline Tasks
+# ==========================================================
+
+from scripts.sources.kaggle.download_olist_dataset import (
+    main as download_olist_dataset,
+)
+
+from scripts.sources.weather.fetch_weather_api import (
+    main as fetch_weather_api,
+)
+
+from scripts.schemas.infer_bigquery_schema import (
+    main as infer_olist_schema,
+)
+
+from scripts.schemas.infer_weather_schema import (
+    main as infer_weather_schema,
+)
+
+from scripts.gcs.upload_olist_to_gcs import (
+    main as upload_olist_to_gcs,
+)
+
+from scripts.gcs.upload_weather_to_gcs import (
+    main as upload_weather_to_gcs,
+)
+
+from scripts.bigquery.create_datasets import (
+    main as create_bigquery_datasets,
+)
+
+from scripts.bigquery.create_tables import (
+    main as create_bigquery_tables,
+)
+
+from scripts.bigquery.load_olist_to_bigquery import (
+    main as load_olist_to_bigquery,
+)
+
+from scripts.bigquery.load_weather_to_bigquery import main as load_weather_to_bigquery
 
 # ==========================================================
 # Default Arguments
@@ -25,137 +77,111 @@ default_args = {
 # ==========================================================
 
 with DAG(
-    dag_id="olist_data_engineering_pipeline",
-    description="End-to-end Olist Data Engineering Pipeline",
+    dag_id="olist_gcp_data_engineering_pipeline",
+    description="End-to-End Olist GCP Data Engineering Pipeline",
     start_date=datetime(2026, 1, 1),
     schedule=None,
     catchup=False,
     default_args=default_args,
     tags=[
-        "olist",
-        "data-engineering",
-        "postgresql",
-        "parquet",
-        "duckdb",
+        "gcp",
+        "bigquery",
+        "gcs",
+        "airflow",
         "dbt",
+        "olist",
     ],
 ) as dag:
-    # ==========================================================
-    # Start & End
-    # ==========================================================
+
+    # ======================================================
+    # Start / End
+    # ======================================================
 
     start = EmptyOperator(task_id="start")
 
     end = EmptyOperator(task_id="end")
 
-    # ==========================================================
-    # Commands
-    # ==========================================================
+    # ======================================================
+    # Source
+    # ======================================================
 
-    COMMANDS = {
-        "profile": "python /opt/airflow/scripts/utilities/profile_dataset.py",
-        "verify": "python /opt/airflow/scripts/utilities/verify_keys.py",
-        "postgres": "python /opt/airflow/scripts/ingestion/ingest_postgres.py",
-        "parquet": "PYTHONPATH=/opt/airflow python /opt/airflow/scripts/export/export_parquet.py",
-        "duckdb": "PYTHONPATH=/opt/airflow python /opt/airflow/scripts/warehouse/load_duckdb.py",
-        "dbt_run": "cd /opt/airflow/dbt_olist && dbt run",
-        "dbt_test": "cd /opt/airflow/dbt_olist && dbt test",
-        "dbt_docs": "cd /opt/airflow/dbt_olist && dbt docs generate",
-    }
-
-    # ==========================================================
-    # Profile Dataset
-    # ==========================================================
-
-    profile_dataset = BashOperator(
-        task_id="profile_dataset",
-        bash_command=COMMANDS["profile"],
-        cwd="/opt/airflow",
+    task_download_olist = PythonOperator(
+        task_id="download_olist_dataset",
+        python_callable=download_olist_dataset,
     )
 
-    # ==========================================================
-    # Verify Keys
-    # ==========================================================
-
-    verify_keys = BashOperator(
-        task_id="verify_keys",
-        bash_command=COMMANDS["verify"],
-        cwd="/opt/airflow",
+    task_fetch_weather = PythonOperator(
+        task_id="fetch_weather_api",
+        python_callable=fetch_weather_api,
     )
 
-    # ==========================================================
-    # Load PostgreSQL
-    # ==========================================================
+    # ======================================================
+    # Schema
+    # ======================================================
 
-    load_postgresql = BashOperator(
-        task_id="load_postgresql",
-        bash_command=COMMANDS["postgres"],
-        cwd="/opt/airflow",
+    task_infer_olist_schema = PythonOperator(
+        task_id="infer_olist_schema",
+        python_callable=infer_olist_schema,
     )
 
-    # ==========================================================
-    # Export Parquet
-    # ==========================================================
-
-    export_parquet = BashOperator(
-        task_id="export_parquet",
-        bash_command=COMMANDS["parquet"],
-        cwd="/opt/airflow",
+    task_infer_weather_schema = PythonOperator(
+        task_id="infer_weather_schema",
+        python_callable=infer_weather_schema,
     )
 
-    # ==========================================================
-    # Load DuckDB
-    # ==========================================================
+    # ======================================================
+    # GCS
+    # ======================================================
 
-    load_duckdb = BashOperator(
-        task_id="load_duckdb",
-        bash_command=COMMANDS["duckdb"],
-        cwd="/opt/airflow",
+    task_upload_olist = PythonOperator(
+        task_id="upload_olist_to_gcs",
+        python_callable=upload_olist_to_gcs,
     )
 
-    # ==========================================================
-    # dbt Run
-    # ==========================================================
-
-    dbt_run = BashOperator(
-        task_id="dbt_run",
-        bash_command=COMMANDS["dbt_run"],
-        cwd="/opt/airflow",
+    task_upload_weather = PythonOperator(
+        task_id="upload_weather_to_gcs",
+        python_callable=upload_weather_to_gcs,
     )
 
-    # ==========================================================
-    # dbt Test
-    # ==========================================================
+    # ======================================================
+    # BigQuery
+    # ======================================================
 
-    dbt_test = BashOperator(
-        task_id="dbt_test",
-        bash_command=COMMANDS["dbt_test"],
-        cwd="/opt/airflow",
+    task_create_datasets = PythonOperator(
+        task_id="create_bigquery_datasets",
+        python_callable=create_bigquery_datasets,
     )
 
-    # ==========================================================
-    # dbt Docs
-    # ==========================================================
-
-    dbt_docs = BashOperator(
-        task_id="dbt_docs",
-        bash_command=COMMANDS["dbt_docs"],
-        cwd="/opt/airflow",
+    task_create_tables = PythonOperator(
+        task_id="create_bigquery_tables",
+        python_callable=create_bigquery_tables,
     )
 
-    # ==========================================================
-    # Pipeline Dependencies
-    # ==========================================================
+    task_load_olist = PythonOperator(
+        task_id="load_olist_to_bigquery",
+        python_callable=load_olist_to_bigquery,
+    )
+
+    task_load_weather = PythonOperator(
+        task_id="load_weather_to_bigquery",
+        python_callable=load_weather_to_bigquery,
+    )
+
+    # ======================================================
+    # Dependencies
+    # ======================================================
 
     (
         start
-        >> profile_dataset
-        >> verify_keys
-        >> load_postgresql
-        >> export_parquet
-        >> load_duckdb
-        >> dbt_run
-        >> dbt_test
-        >> dbt_docs
+        >> task_download_olist
+        >> task_fetch_weather
+        >> task_infer_olist_schema
+        >> task_infer_weather_schema
+        >> task_upload_olist
+        >> task_upload_weather
+        >> task_create_datasets
+        >> task_create_tables
+        >> task_load_olist
+        >> task_load_weather
         >> end
     )
