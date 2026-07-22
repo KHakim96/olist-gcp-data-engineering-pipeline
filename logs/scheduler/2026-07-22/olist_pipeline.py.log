@@ -1519,3 +1519,73 @@
 [2026-07-22T04:12:22.843+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:12:22.843+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2026-07-22T04:12:22.855+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:12:22.855+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
 [2026-07-22T04:12:22.869+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 1.095 seconds
+[2026-07-22T04:12:53.203+0000] {processor.py:186} INFO - Started process (PID=346) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:12:53.204+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:12:53.207+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:12:53.206+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:12:54.147+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:12:54.170+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:12:54.170+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:12:54.179+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:12:54.179+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:12:54.193+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.999 seconds
+[2026-07-22T04:13:24.493+0000] {processor.py:186} INFO - Started process (PID=358) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:13:24.494+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:13:24.498+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:13:24.497+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:13:25.564+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:13:25.594+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:13:25.594+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:13:25.604+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:13:25.604+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:13:25.614+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 1.129 seconds
+[2026-07-22T04:13:55.815+0000] {processor.py:186} INFO - Started process (PID=370) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:13:55.816+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:13:55.818+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:13:55.818+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:13:56.743+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:13:56.764+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:13:56.764+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:13:56.775+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:13:56.774+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:13:56.786+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.982 seconds
+[2026-07-22T04:14:27.200+0000] {processor.py:186} INFO - Started process (PID=382) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:14:27.201+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:14:27.204+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:14:27.204+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:14:28.056+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:14:28.078+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:14:28.077+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:14:28.086+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:14:28.086+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:14:28.097+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.904 seconds
+[2026-07-22T04:14:58.469+0000] {processor.py:186} INFO - Started process (PID=394) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:14:58.471+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:14:58.474+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:14:58.474+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:14:59.260+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:14:59.287+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:14:59.287+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:14:59.296+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:14:59.296+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:14:59.306+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.846 seconds
+[2026-07-22T04:15:29.642+0000] {processor.py:186} INFO - Started process (PID=406) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:15:29.643+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:15:29.646+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:15:29.645+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:15:30.565+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:15:30.583+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:15:30.583+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:15:30.591+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:15:30.591+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:15:30.601+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.969 seconds
+[2026-07-22T04:16:00.971+0000] {processor.py:186} INFO - Started process (PID=418) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:16:00.972+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:16:00.974+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:16:00.974+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:16:01.811+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:16:01.832+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:16:01.832+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:16:01.840+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:16:01.840+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:16:01.851+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.887 seconds
+[2026-07-22T04:16:32.210+0000] {processor.py:186} INFO - Started process (PID=430) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:16:32.212+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:16:32.217+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:16:32.215+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:16:33.224+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:16:33.246+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:16:33.246+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:16:33.256+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:16:33.255+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:16:33.265+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 1.072 seconds
+[2026-07-22T04:17:03.514+0000] {processor.py:186} INFO - Started process (PID=442) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:17:03.515+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:17:03.517+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:17:03.516+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:17:04.366+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:17:04.384+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:17:04.383+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:17:04.392+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:17:04.392+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:17:04.402+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 0.895 seconds
+[2026-07-22T04:17:34.733+0000] {processor.py:186} INFO - Started process (PID=454) to work on /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:17:34.734+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/olist_pipeline.py for tasks to queue
+[2026-07-22T04:17:34.738+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:17:34.737+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:17:35.760+0000] {processor.py:925} INFO - DAG(s) 'olist_gcp_data_engineering_pipeline' retrieved from /opt/airflow/dags/olist_pipeline.py
+[2026-07-22T04:17:35.784+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:17:35.784+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-07-22T04:17:35.796+0000] {logging_mixin.py:190} INFO - [2026-07-22T04:17:35.796+0000] {dag.py:4180} INFO - Setting next_dagrun for olist_gcp_data_engineering_pipeline to None, run_after=None
+[2026-07-22T04:17:35.807+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/olist_pipeline.py took 1.084 seconds

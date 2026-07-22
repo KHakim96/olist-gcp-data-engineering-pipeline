@@ -11,4 +11,8 @@ __pycache__/
 .DS_Store
 
 config/service-account.json
-.env
+
+
+logs/
+
+
