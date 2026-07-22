@@ -1,0 +1,25 @@
+[2026-07-22T04:10:04.562+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-07-22T04:10:04.577+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: olist_gcp_data_engineering_pipeline.create_bigquery_datasets manual__2026-07-22T04:09:27.887367+00:00 [queued]>
+[2026-07-22T04:10:04.582+0000] {taskinstance.py:2631} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: olist_gcp_data_engineering_pipeline.create_bigquery_datasets manual__2026-07-22T04:09:27.887367+00:00 [queued]>
+[2026-07-22T04:10:04.583+0000] {taskinstance.py:2884} INFO - Starting attempt 1 of 3
+[2026-07-22T04:10:04.590+0000] {taskinstance.py:2907} INFO - Executing <Task(PythonOperator): create_bigquery_datasets> on 2026-07-22 04:09:27.887367+00:00
+[2026-07-22T04:10:04.593+0000] {standard_task_runner.py:72} INFO - Started process 262 to run task
+[2026-07-22T04:10:04.595+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'olist_gcp_data_engineering_pipeline', 'create_bigquery_datasets', 'manual__2026-07-22T04:09:27.887367+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/olist_pipeline.py', '--cfg-path', '/tmp/tmpi9mf02va']
+[2026-07-22T04:10:04.597+0000] {standard_task_runner.py:105} INFO - Job 8: Subtask create_bigquery_datasets
+[2026-07-22T04:10:04.627+0000] {task_command.py:467} INFO - Running <TaskInstance: olist_gcp_data_engineering_pipeline.create_bigquery_datasets manual__2026-07-22T04:09:27.887367+00:00 [running]> on host 0539e6447189
+[2026-07-22T04:10:04.676+0000] {taskinstance.py:3157} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Luqman' AIRFLOW_CTX_DAG_ID='olist_gcp_data_engineering_pipeline' AIRFLOW_CTX_TASK_ID='create_bigquery_datasets' AIRFLOW_CTX_EXECUTION_DATE='2026-07-22T04:09:27.887367+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-22T04:09:27.887367+00:00'
+[2026-07-22T04:10:04.676+0000] {taskinstance.py:740} INFO - ::endgroup::
+[2026-07-22T04:10:04.742+0000] {logging_mixin.py:190} INFO - ======================================================================
+[2026-07-22T04:10:04.742+0000] {logging_mixin.py:190} INFO - Create BigQuery Datasets
+[2026-07-22T04:10:04.742+0000] {logging_mixin.py:190} INFO - ======================================================================
+[2026-07-22T04:10:05.230+0000] {logging_mixin.py:190} INFO - ✓ olist_raw
+[2026-07-22T04:10:05.499+0000] {logging_mixin.py:190} INFO - ✓ olist_analytics
+[2026-07-22T04:10:05.501+0000] {logging_mixin.py:190} INFO - ======================================================================
+[2026-07-22T04:10:05.501+0000] {logging_mixin.py:190} INFO - Completed
+[2026-07-22T04:10:05.502+0000] {logging_mixin.py:190} INFO - ======================================================================
+[2026-07-22T04:10:05.502+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-07-22T04:10:05.519+0000] {taskinstance.py:349} INFO - ::group::Post task execution logs
+[2026-07-22T04:10:05.520+0000] {taskinstance.py:361} INFO - Marking task as SUCCESS. dag_id=olist_gcp_data_engineering_pipeline, task_id=create_bigquery_datasets, run_id=manual__2026-07-22T04:09:27.887367+00:00, execution_date=20260722T040927, start_date=20260722T041004, end_date=20260722T041005
+[2026-07-22T04:10:05.566+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-07-22T04:10:05.587+0000] {taskinstance.py:3924} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-22T04:10:05.588+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
