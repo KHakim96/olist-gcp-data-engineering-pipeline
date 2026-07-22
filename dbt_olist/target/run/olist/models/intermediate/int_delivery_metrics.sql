@@ -1,4 +1,8 @@
-SELECT
+
+
+  create or replace view `olist-gcp-data-engineering`.`olist_analytics`.`int_delivery_metrics`
+  OPTIONS()
+  as SELECT
 
     order_id,
 
@@ -44,6 +48,7 @@ SELECT
         ELSE 'Late'
     END AS delivery_status
 
-FROM {{ ref('stg_orders') }}
+FROM `olist-gcp-data-engineering`.`olist_analytics`.`stg_orders`
 
-WHERE order_delivered_customer_date IS NOT NULL
+WHERE order_delivered_customer_date IS NOT NULL;
+

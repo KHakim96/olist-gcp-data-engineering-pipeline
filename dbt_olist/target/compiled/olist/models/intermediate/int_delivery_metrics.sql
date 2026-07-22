@@ -44,6 +44,6 @@ SELECT
         ELSE 'Late'
     END AS delivery_status
 
-FROM {{ ref('stg_orders') }}
+FROM `olist-gcp-data-engineering`.`olist_analytics`.`stg_orders`
 
 WHERE order_delivered_customer_date IS NOT NULL

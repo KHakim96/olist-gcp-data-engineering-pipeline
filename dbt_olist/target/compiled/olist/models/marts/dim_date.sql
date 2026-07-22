@@ -2,6 +2,6 @@ SELECT DISTINCT
 
     DATE(order_purchase_timestamp) AS order_date
 
-FROM {{ ref('stg_orders') }}
+FROM `olist-gcp-data-engineering`.`olist_analytics`.`stg_orders`
 
 WHERE order_purchase_timestamp IS NOT NULL

@@ -4,18 +4,37 @@ sources:
 
   - name: raw
 
-    description: "Raw tables loaded into DuckDB from the Parquet Data Lake."
+    description: "Raw tables loaded into BigQuery."
 
-    schema: main
+    database: olist-gcp-data-engineering
+
+    schema: olist_raw
 
     tables:
 
-      - name: category_translation
       - name: customers
-      - name: sellers
-      - name: products
-      - name: geolocation
+        identifier: olist_customers_dataset
+
       - name: orders
+        identifier: olist_orders_dataset
+
+      - name: products
+        identifier: olist_products_dataset
+
+      - name: sellers
+        identifier: olist_sellers_dataset
+
+      - name: geolocation
+        identifier: olist_geolocation_dataset
+
       - name: order_items
+        identifier: olist_order_items_dataset
+
       - name: order_payments
+        identifier: olist_order_payments_dataset
+
       - name: order_reviews
+        identifier: olist_order_reviews_dataset
+
+      - name: category_translation
+        identifier: product_category_name_translation

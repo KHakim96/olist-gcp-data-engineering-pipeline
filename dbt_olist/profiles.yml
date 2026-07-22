@@ -1,23 +1,21 @@
-# olist:
-#   target: dev
-
-#   outputs:
-
-#     dev:
-#       type: duckdb
-
-#       path: /opt/airflow/warehouse/olist.duckdb
-
-#       threads: 4
-
 olist:
   target: dev
 
   outputs:
 
     dev:
-      type: duckdb
+      type: bigquery
+      method: service-account
 
-      path: ../warehouse/olist.duckdb
+      project: olist-gcp-data-engineering
+
+      dataset: olist_analytics
 
       threads: 4
+
+      # keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS', '../config/service-account.json') }}"
+
+      location: asia-southeast1
+
+      priority: interactive
