@@ -569,7 +569,7 @@ with tab1:
         with st.container(key="chart_revenue_trend"):
             monthly_df = (
                 filtered_orders.set_index("order_purchase_timestamp")
-                .resample("M")
+                .resample("ME")
                 .agg(revenue=("total_payment", "sum"), orders=("order_id", "nunique"))
                 .reset_index()
             )
