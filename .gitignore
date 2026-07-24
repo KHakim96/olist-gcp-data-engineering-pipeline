@@ -1,18 +1,16 @@
-config/service-account.json
+# GCP Credentials & Secrets
+config/*.json
+service-account.json
+service_account.json
 
+# Python & Environment
 __pycache__/
-
 *.pyc
-
 .env
-
 .venv
 
+# System Files
 .DS_Store
 
-config/service-account.json
-
-
+# Logs
 logs/
-
-
