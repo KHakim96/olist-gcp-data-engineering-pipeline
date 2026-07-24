@@ -1,36 +1,29 @@
-apache-airflow-providers-google
+# Streamlit & UI Dependencies
+streamlit
+pandas
+numpy
+plotly
+graphviz
 
+# GCP Dependencies
 google-cloud-storage
 google-cloud-bigquery
 google-cloud-bigquery-storage
+db-dtypes
+apache-airflow-providers-google
 
-pandas
-numpy
+# Data Engineering & Transformations
+dbt-core
+dbt-bigquery
 pyarrow
-
 sqlalchemy
 psycopg2-binary
 
-dbt-core
-dbt-bigquery
-
+# Utilities & Data Ingestion
 python-dotenv
-
 requests
-
 pytest
-
 loguru
-
 tabulate
-
-# ==========================================
-# Google Cloud
-# ==========================================
-
-google-cloud-storage
-google-cloud-bigquery
-pandas
-requests
 kagglehub
 pyyaml
