@@ -1,11 +1,13 @@
 # ⚡ Olist E-Commerce GCP Data Engineering & Executive Analytics Platform
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://olist-gcp-data-engineering-pipeline-ryyjeaytzpiczauzgypmh6.streamlit.app/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Google Cloud Platform](https://img.shields.io/badge/GCP-BigQuery%20%7C%20GCS%20%7C%20GCE-4285F4.svg?logo=google-cloud)](https://cloud.google.com/)
 [![dbt Core](https://img.shields.io/badge/dbt-1.12%20Core-FF694B.svg?logo=dbt)](https://www.getdbt.com/)
 [![Apache Airflow](https://img.shields.io/badge/Airflow-2.x%20Docker-017CEE.svg?logo=apache-airflow)](https://airflow.apache.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B.svg?logo=streamlit)](https://streamlit.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**🚀 Live Executive Dashboard:** [Click here to view the Live Streamlit App](https://olist-gcp-data-engineering-pipeline-ryyjeaytzpiczauzgypmh6.streamlit.app/)
 
 An enterprise-grade, end-to-end ELT data pipeline and executive intelligence platform built on **Google Cloud Platform (GCP)**. This system processes ~100k real-world Brazilian e-commerce orders (Olist dataset) alongside external weather data, transforms raw transactional data into a dimensional star-schema warehouse using **dbt**, orchestrates complex workflows via **Apache Airflow** on Docker, and serves interactive executive insights through a **Streamlit** Web Application.
 
@@ -186,7 +188,9 @@ Pipeline workflows are orchestrated end-to-end by **Apache Airflow** using the D
 
 ## 📊 5. Executive Streamlit Dashboard
 
-The project includes an executive-facing interactive analytics web application built with **Streamlit** and **Plotly** (`app.py`).
+The project includes an executive-facing interactive analytics web application built with **Streamlit** and **Plotly** (`app.py`), deployed live on **Streamlit Community Cloud** and connected directly to **Google BigQuery**.
+
+👉 **Live Demo:** [Open Streamlit Executive Dashboard](https://olist-gcp-data-engineering-pipeline-ryyjeaytzpiczauzgypmh6.streamlit.app/)
 
 ### Key Executive Metrics (KPI Ribbon)
 - 💰 **Total Revenue**: Total gross merchandise value (GMV in BRL).
