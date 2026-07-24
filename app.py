@@ -693,7 +693,7 @@ with tab2:
             deliv_monthly = (
                 filtered_orders.dropna(subset=["order_delivered_customer_date"])
                 .set_index("order_purchase_timestamp")
-                .groupby([pd.Grouper(freq="M"), "delivery_status"])
+                .groupby([pd.Grouper(freq="ME"), "delivery_status"])
                 .size()
                 .unstack(fill_value=0)
                 .reset_index()
